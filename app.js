@@ -1,4 +1,5 @@
 /* TYPER */
+var night;
 const TYPER = function () {
   if (TYPER.instance_) {
     return TYPER.instance_
@@ -15,10 +16,22 @@ const TYPER = function () {
   this.wordMinLength = 5
   this.guessedWords = 0
 
-  this.init()
+  this.init()  
+  
 }
 
 window.TYPER = TYPER
+
+function nightMode() {
+  if (night === 1) {
+    document.body.style.backgroundColor = "white";
+    document.body.style.color = "black";
+    night = 0;
+  } else {
+    document.body.style.backgroundColor = "rgb(75, 75, 75)";
+    night = 1;
+  }
+}
 
 TYPER.prototype = {
   init: function () {
@@ -57,7 +70,15 @@ TYPER.prototype = {
     this.word.Draw()
 
     window.addEventListener('keypress', this.keyPressed.bind(this))
+	this.startTime = new Date().getTime()
+	window.setInterval(this.loop.bind(this), 1)
   },
+  
+  loop: function() {
+	  this.word.Draw()
+	  const currentTime = new Date().getTime()
+	  this.counter = currentTime - this.startTime
+  },  
 
   generateWord: function () {
     const generatedWordLength = this.wordMinLength + parseInt(this.guessedWords / 5)
@@ -67,6 +88,7 @@ TYPER.prototype = {
     this.word = new Word(wordFromArray, this.canvas, this.ctx)
   },
 
+  
   keyPressed: function (event) {
     const letter = String.fromCharCode(event.which)
 
@@ -99,7 +121,15 @@ Word.prototype = {
     this.ctx.textAlign = 'center'
     this.ctx.font = '140px Courier'
     this.ctx.fillText(this.left, this.canvas.width / 2, this.canvas.height / 2)
-  },
+	
+	this.ctx.textAlign = 'center'
+    this.ctx.font = '140px Arial'
+    this.ctx.fillText(typer.counter, 300, 300)
+	
+	this.ctx.textAlign = 'center'
+    this.ctx.font = '140px Arial'
+    this.ctx.fillText(typer.guessedWords, 500, 500)
+  },//hetkel kuvab nii kulunud aega kui ka skoori
 
   removeFirstLetter: function () {
     this.left = this.left.slice(1)
