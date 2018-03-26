@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Avaleht</title>
+    <style> 
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html, body, canvas {
+        width: 100%;
+        height: 100%;
+      }
+      
+      canvas {
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+	<center>
+	<h2>Mäng TYPER</h2>
+	<h4>Kristo Roots ja Caspar Sepp</h4>
+	<br>
+	Mängu põhimõte on võimalikult kiiresti trükkida ekraanile ilmuvad sõnad. 
+	<br>
+	Õigesti sisestatud sõna eest saab ühe punkti, vale tähe korral eemaldatakse üks punkt ning tekib uus sõna. 
+	<br>
+	Mäng kestab kuni saad 20 punkti.
+	<br>
+	 <form action="/action_page.php" method="get" name="userName">
+	Nimi: <input type="text" name="uName">
+	<input type="button" onclick="nameSubmit()" value="Sisesta!">
+	</form> 
+	<br>
+	<a href="index.html">MÄNGIMA</a>
+	<a href="hiscore.html">TABEL</a>
+	</center>
+
+
+	<canvas></canvas>
+  </body>
+</html>

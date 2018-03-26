@@ -172,10 +172,10 @@ function restartGame(){
 function gameFinish(){
 	let r = confirm("Game over! \n Your Score: " + "\n Again?")
 	if(r == true){
-	location.reload()
+		location.reload()
 	}
 	else {
-		//suunab infolehele
+		location.href = 'first.html';
 	}
 }
 
