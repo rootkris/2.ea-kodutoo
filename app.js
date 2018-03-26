@@ -97,7 +97,12 @@ TYPER.prototype = {
 
       if (this.word.left.length === 0) {
         this.guessedWords += 1
-
+		if (this.guessedWords == 20){
+			this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+			gameFinish();
+		}
+		
+		
         this.generateWord()
       }
 
@@ -148,6 +153,34 @@ function structureArrayByWordLength (words) {
   }
 
   return tempArray
+}
+
+function startGame(){
+	const typer = new TYPER()
+	window.typer = typer
+}
+
+function restartGame(){
+	const typer = new TYPER()
+	window.typer = typer
+	typer.generateWord()
+	typer.word.Draw()
+	this.guessedWords = 0
+}
+
+function gameFinish(){
+	let r = confirm("Game over! \n Your Score: " + "\n Again?")
+	if(r == true){
+		this.words = []
+		this.word = null
+		this.wordMinLength = 5
+		this.guessedWords = 0
+		typer.counter = 0
+		restartGame()
+	}
+	else {
+		//suunab infolehele
+	}
 }
 
 window.onload = function () {
