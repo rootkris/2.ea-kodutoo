@@ -97,7 +97,7 @@ TYPER.prototype = {
 
       if (this.word.left.length === 0) {
         this.guessedWords += 1
-		if (this.guessedWords == 20){
+		if (this.guessedWords == 5){
 			this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 			gameFinish();
 		}
@@ -161,22 +161,18 @@ function startGame(){
 }
 
 function restartGame(){
+	this.guessedWords = 0
 	const typer = new TYPER()
 	window.typer = typer
 	typer.generateWord()
 	typer.word.Draw()
-	this.guessedWords = 0
+
 }
 
 function gameFinish(){
 	let r = confirm("Game over! \n Your Score: " + "\n Again?")
 	if(r == true){
-		this.words = []
-		this.word = null
-		this.wordMinLength = 5
-		this.guessedWords = 0
-		typer.counter = 0
-		restartGame()
+	location.reload()
 	}
 	else {
 		//suunab infolehele
