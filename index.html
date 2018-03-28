@@ -1,28 +1,44 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>typer</title>
-    <style> 
-      * {
+    <head>
+        <meta charset="UTF-8">
+        <title>Typer game</title>
+        <style> 
+         * {
         margin: 0;
         padding: 0;
       }
-
       html, body, canvas {
         width: 100%;
         height: 100%;
+		background-color: powderblue;
       }
       
       canvas {
         position: absolute;
       }
-    </style>
-    <script src="app.js"></script>
-  </head>
-  <body>
-	<p>ÖÖREŽIIM  <input type="checkbox" onclick="nightMode()"></p>
 
-	<canvas></canvas>
-  </body>
-</html>
+	  #playerName {
+		position: relative;
+		text-align: center; 
+		margin-top: 15px;
+	  }
+	  
+	  p {
+		text-align: center;
+		font-family: "Courier";
+		font-size: 20px;
+	  }
+        </style>
+        <script src="app.js"></script>
+    </head>
+    <body>
+			<p>Selle mängu eesmärk on kirjutada ekraanile kuvatavad sõnad nii kiiresti kui suudad.</p>
+        </div>
+        <div id="playerName">
+            <input id="name" type="text" placeholder="Name">
+            <br>
+            <button onclick="playGame()">Start</button>
+        </div>
+    </body>
+</html> 
