@@ -1,4 +1,6 @@
 /* TYPER */
+var night;
+
 const TYPER = function () {
   if (TYPER.instance_) {
     return TYPER.instance_
@@ -15,6 +17,7 @@ const TYPER = function () {
   this.wordMinLength = 5
   this.guessedWords = 0
   this.score = 0
+  this.playerScore = 0
 
   //this.init()
 }
@@ -79,9 +82,11 @@ TYPER.prototype = {
 
       if (this.word.left.length === 0) {
         this.guessedWords += 1
+		this.playerScore +=1
 		this.score += typer.word.word.length * 2
-			if(this.guessedWords == 10){
+			if(this.playerScore == 2){
 				this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+				playerScore = this.playerScore
 				gameOver();
 			}	
         this.generateWord()
@@ -90,6 +95,8 @@ TYPER.prototype = {
       this.word.Draw()
     }
   }
+  
+  
 }
 
 /* WORD */
@@ -127,6 +134,11 @@ Word.prototype = {
 	this.ctx.font = "100px Century Gothic"
 	this.ctx.fillText("Score: " + typer.score, this.canvas.width / 2, this.canvas.height-this.canvas.height / 1.5)
 	
+	this.ctx.font= "75px Century Gothic"
+	
+	
+	
+	
 	for (let i = 0, len = JSON.parse(localStorage.getItem('arr')).length; i < len; i++) {
            if (i < 10) {
 			this.ctx.textAlign = 'right'
@@ -160,17 +172,38 @@ function structureArrayByWordLength (words) {
 }
 
 window.onload = function () {
+  document.body.style.backgroundColor = "powderblue";
   const typer = new TYPER()
   window.typer = typer
 }
 
 function gameOver(){
-	typer.word.infoScreen()
-	saveData(name,typer.score)
+	//typer.word.infoScreen()
+	localStorage.setItem(this.name, playerScore);
+	window.location.replace("scores.html")
+
 }
 
+function generateScoreTable() {
+  /* https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_node_appendchild
+     https://stackoverflow.com/questions/8419354/get-html5-localstorage-keys */
 
-function saveData (playerName, playerScore) {
+  for (var i = 0, len = localStorage.length; i < len; ++i) {
+    let tableRow = document.createElement("tr")
+    let th = document.createElement("th")
+    let textNodeKey = document.createTextNode(localStorage.key(i))
+    th.appendChild(textNodeKey)
+    let td = document.createElement("td")
+    let textNodeValue = document.createTextNode(localStorage.getItem(localStorage.key(i)))
+    td.appendChild(textNodeValue)
+    tableRow.appendChild(th)
+    tableRow.appendChild(td)
+    document.getElementById("scoreTableBody").appendChild(tableRow)
+  }
+} 
+
+
+/*function saveData (playerName, playerScore) {
     arr = []
     if (window.localStorage.length == 0) {
         player = [playerName,playerScore]
@@ -195,7 +228,7 @@ function saveData (playerName, playerScore) {
 
         localStorage.setItem('arr', JSON.stringify(stored))
     }
-}
+}*/
 
 function playGame(){
 	if(document.querySelector("#name").value !=""){
@@ -207,4 +240,14 @@ function playGame(){
 	} else {
 		alert("Please enter name!")
 	}
+}
+
+function nightMode() {
+  if (night === 1) {
+    document.body.style.backgroundColor = "powderblue";
+    night = 0;
+  } else {
+    document.body.style.backgroundColor = "grey";
+    night = 1;
+  }
 }
