@@ -12,6 +12,7 @@
       html, body, canvas {
         width: 100%;
         height: 100%;
+		background-color: powderblue;
       }
       
       canvas {
@@ -28,12 +29,18 @@
 		font-family: "Courier";
 		font-size: 20px;
 	  }
+	  
+	  #tulemused {
+		position: relative;
+		text-align: center;
+		font-family: "Century Gothic";
+	  }
         </style>
     <script src="app.js"></script>
 </head>
 
 <body onload="generateScoreTable()">
-    <h1 class="display-4" style="text-align: center">TULEMUSED</h1>
+    <h1 class="display-4" style="text-align: center" id="tulemused">TULEMUSED</h1>
     <table class="table">
         <thead>
             <tr>

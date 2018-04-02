@@ -77,24 +77,31 @@ TYPER.prototype = {
   keyPressed: function (event) {
     const letter = String.fromCharCode(event.which)
 
-    if (letter === this.word.left.charAt(0)) {
-      this.word.removeFirstLetter()
-
-      if (this.word.left.length === 0) {
-        this.guessedWords += 1
-		this.playerScore +=1
-		this.score += typer.word.word.length * 2
-			if(this.playerScore == 2){
-				this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
-				playerScore = this.playerScore
-				gameOver();
-			}	
-        this.generateWord()
-      }
-
-      this.word.Draw()
+  if (letter === this.word.left.charAt(0)) {
+    this.word.removeFirstLetter()
+	this.playerScore += 50 
+	document.body.style.background = "powderblue"
+	  
+    if (this.word.left.length === 0) {
+    this.guessedWords += 1
+	if(this.guessedWords%10 === 0){
+		this.playerScore += 25
+	}
+	if(this.guessedWords == 30){
+		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+		playerScore = this.playerScore
+		gameOver();
+	}	
+    this.generateWord()
     }
+
+    this.word.Draw()
   }
+  else {
+	document.body.style.background = "red"
+	this.playerScore -=25
+  }
+}  
   
   
 }
@@ -117,7 +124,7 @@ Word.prototype = {
 	
 	this.ctx.textAlign = "left"
 	this.ctx.font = "50px Century Gothic"
-	this.ctx.fillText("Score:" + typer.score, 250, 250)
+	this.ctx.fillText("Score:" + typer.playerScore, 250, 250)
 	
 	this.ctx.textAlign = "left"
 	this.ctx.font = "50px Century Gothic"
