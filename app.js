@@ -16,10 +16,7 @@ const TYPER = function () {
   this.word = null
   this.wordMinLength = 5
   this.guessedWords = 0
-  this.score = 0
   this.playerScore = 0
-
-  //this.init()
 }
 
 window.TYPER = TYPER
@@ -80,7 +77,12 @@ TYPER.prototype = {
   if (letter === this.word.left.charAt(0)) {
     this.word.removeFirstLetter()
 	this.playerScore += 50 
-	document.body.style.background = "powderblue"
+	if (night === 1){
+		document.body.style.background = "grey"
+	}
+	else {
+		document.body.style.background = "powderblue"
+	}	
 	  
     if (this.word.left.length === 0) {
     this.guessedWords += 1
@@ -102,8 +104,6 @@ TYPER.prototype = {
 	this.playerScore -=25
   }
 }  
-  
-  
 }
 
 /* WORD */
@@ -208,34 +208,6 @@ function generateScoreTable() {
     document.getElementById("scoreTableBody").appendChild(tableRow)
   }
 } 
-
-
-/*function saveData (playerName, playerScore) {
-    arr = []
-    if (window.localStorage.length == 0) {
-        player = [playerName,playerScore]
-        arr.push(player)
-        localStorage.setItem('arr', JSON.stringify(arr))
-    } else {
-        let stored = JSON.parse(localStorage.getItem('arr'))
-        let player2 = [playerName,playerScore]
-        stored.push(player2)
-
-        //sort
-        let length = stored.length
-        for (let i=0; i<length; i++) {
-            for (let j=0; j<(length-i-1); j++) {
-                if (stored[j][1] < stored[j+1][1]) {
-                    let tmp = stored[j]
-                    stored[j] = stored[j+1]
-                    stored[j+1] = tmp
-                }
-            }
-        }
-
-        localStorage.setItem('arr', JSON.stringify(stored))
-    }
-}*/
 
 function playGame(){
 	if(document.querySelector("#name").value !=""){
