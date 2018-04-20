@@ -33,6 +33,8 @@ TYPER.prototype = {
     this.canvas.height = this.HEIGHT * 2
 
     this.loadWords()
+
+	
   },
 
   loadWords: function () {
@@ -103,7 +105,20 @@ TYPER.prototype = {
 	document.body.style.background = "red"
 	this.playerScore -=25
   }
-}  
+},
+
+  registerServiceWorker: function () {
+	  if("serviceWorker" in navigator){
+		  navigator.serviceWorker.register("serviceWorker.js").then(function (registration){
+			  //Registration was successful
+			  console.log("ServiceWorker registartion successful: ", registration)
+		  }, function (err) {
+			  //Registration failed :(
+			  console.log("ServiceWorker registration failed: ", err)
+		  })
+	  }
+  }
+
 }
 
 /* WORD */
@@ -182,6 +197,8 @@ window.onload = function () {
   document.body.style.backgroundColor = "powderblue";
   const typer = new TYPER()
   window.typer = typer
+  //kävitab 
+  typer.registerServiceWorker()
 }
 
 function gameOver(){
